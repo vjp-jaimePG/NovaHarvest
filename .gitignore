@@ -1,0 +1,5 @@
+# Credenciales reales
+.env
+
+# Certificados y claves privadas
+nginx/certs/
