@@ -1,0 +1,13 @@
+services:
+  # Servidor web de la primera fase.
+  web:
+    image: nginx:1.27-alpine
+
+    # Puerto de Debian : puerto del contenedor.
+    ports:
+      - "8080:80"
+
+    # Archivos del proyecto montados en modo solo lectura.
+    volumes:
+      - ./web:/usr/share/nginx/html:ro
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
