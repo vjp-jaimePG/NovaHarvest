@@ -1,0 +1,87 @@
+/* Aspecto general */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f2;
+    color: #333;
+}
+
+/* Cabecera y logotipo */
+header {
+    background-color: #285c35;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header img {
+    width: 80px;
+}
+
+/* Enlaces del menú */
+nav a {
+    display: inline-block;
+    color: white;
+    margin: 6px 10px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Contenido principal */
+main {
+    max-width: 900px;
+    margin: 25px auto;
+    padding: 20px;
+    background-color: white;
+}
+
+h1 {
+    color: #285c35;
+}
+
+/* Campos y botón del formulario */
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+    border: 1px solid #aaa;
+}
+
+button {
+    background-color: #285c35;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+/* Tabla de excedentes */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #e2eddf;
+}
+
+/* Pie de página */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #555;
+}
