@@ -1,3 +1,15 @@
+<?php
+// Lee la configuración que Compose entrega a PHP.
+$dsn = sprintf(
+    'mysql:host=%s;dbname=%s;charset=utf8mb4',
+    getenv('DB_HOST'),
+    getenv('DB_NAME')
+);
+
+$pdo = new PDO($dsn, getenv('DB_USER'), getenv('DB_PASS'));
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$version = $pdo->query('SELECT VERSION()')->fetchColumn();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -25,6 +37,8 @@
     <p>Fecha y hora del servidor: <?= date('d/m/Y H:i:s') ?></p>
 
     <p>Contenedor PHP: <?= getenv('HOSTNAME') ?></p>
+
+    <p>Base de datos: MariaDB <?= $version ?></p>
 
     <p>Página generada por PHP-FPM</p>
 </main>

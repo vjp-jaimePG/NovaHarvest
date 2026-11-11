@@ -1,23 +1,41 @@
 services:
-  # Servidor web: recibe las peticiones del navegador.
+  # Servidor web que recibe las peticiones del navegador.
   web:
     image: nginx:1.27-alpine
     ports:
       - "8080:80"
     volumes:
-      # Páginas y configuración disponibles solo para lectura.
       - ./web:/usr/share/nginx/html:ro
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       - php
 
-  # Procesador de las páginas PHP.
+  # Ejecuta PHP y recibe las credenciales del usuario de la web.
   php:
     build: ./php
+    environment:
+      DB_HOST: db
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
     volumes:
-      # Misma ruta de las páginas que utiliza nginx.
       - ./web:/usr/share/nginx/html:ro
-
-      # Configuración de PHP-FPM y del intérprete.
       - ./php/www.conf:/usr/local/etc/php-fpm.d/www.conf:ro
       - ./php/php.ini:/usr/local/etc/php/conf.d/novaharvest.ini:ro
+    depends_on:
+      - db
+
+  # Guarda los datos en un volumen persistente.
+  db:
+    image: mariadb:11
+    environment:
+      MARIADB_DATABASE: ${DB_NAME}
+      MARIADB_USER: ${DB_USER}
+      MARIADB_PASSWORD: ${DB_PASS}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    volumes:
+      - dbdata:/var/lib/mysql
+
+# Conserva los datos aunque se eliminen los contenedores.
+volumes:
+  dbdata:
